@@ -1,0 +1,20 @@
+{
+  "name": "medapp",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "docker compose up",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "tsc -p src/backend",
+    "build:frontend": "cd src/frontend && npm run build",
+    "start": "node src/backend/dist/main.js",
+    "start:dev": "cd src/backend && npm run start:dev",
+    "migrate": "cd src/backend && npm run db:migrate",
+    "seed": "cd src/backend && npm run db:seed",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "cd src/backend && npm run test",
+    "test:e2e": "cd src/frontend && npm run test:e2e"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

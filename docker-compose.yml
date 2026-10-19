@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: medapp
+      POSTGRES_PASSWORD: medapp
+      POSTGRES_DB: medapp
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medapp"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      target: backend-dev
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://medapp:medapp@db:5432/medapp
+      SEED_PASSWORD: ${SEED_PASSWORD:-Seed!Passw0rd}
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-key}
+    depends_on:
+      db:
+        condition: service_healthy
+    command: [
+      "sh", "-c", 
+      "cd src/backend && npm install && npm run build && npm run migrate && npm run seed && npm run start:dev"
+    ]
+
+  frontend:
+    build:
+      context: .
+      target: frontend-dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+    command: [
+      "sh", "-c", 
+      "cd src/frontend && npm install && npm run dev"
+    ]
+
+volumes:
+  pgdata:
