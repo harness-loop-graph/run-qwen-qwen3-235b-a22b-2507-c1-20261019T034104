@@ -1512,5 +1512,19 @@
       "error": "docker compose up -d --build exited 1. stderr: time=\"2026-10-18T22:57:01-05:00\" level=warning msg=\"/home/andres/Documents/pi-runs/qwen-qwen3-235b-a22b-2507-c1-20261019T034104/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion\"\n Image qwen-qwen3-235b-a22b-2507-c1-20261019t034104-backend Building \n Image qwen-qwen3-235b-a22b-2507-c1-20261019t034104-frontend Building \nDockerfile:43\n\n--------------------\n\n  41 |     WORKDIR /app\n\n  42 |     COPY package*.json .\n\n  43 | >>> R"
     },
     "passed": false
+  },
+  "staticAnalysis": {
+    "sonarOrganization": "harness-loop-graph",
+    "sonarProjectKey": "harness-loop-graph_run-qwen-qwen3-235b-a22b-2507-c1-20261019T034104",
+    "semgrepConfig": [
+      "p/default",
+      "p/typescript"
+    ],
+    "workflowSha256": "a4d532fa84516c7bb0a0b63b2922a6596e5dd65d32fcab606abeeb5bb85f53f5",
+    "removedWorkflows": []
+  },
+  "repository": {
+    "name": "harness-loop-graph/run-qwen-qwen3-235b-a22b-2507-c1-20261019T034104",
+    "url": "branch 'main' set up to track 'origin/main'."
   }
 }
